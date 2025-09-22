@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workout Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+        .workout-form {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        .workouts {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .workout-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            border-left: 4px solid #4CAF50;
+        }
+        .workout-type {
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        .workout-details {
+            color: #e0e0e0;
+            margin-top: 5px;
+        }
+        .google-login {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .google-btn {
+            background: #db4437;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .google-btn:hover {
+            background: #c23321;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏋️ Workout Tracker</h1>
+        
+        <div class="google-login">
+            <a href="#" class="google-btn" onclick="googleLogin()">🔐 Logg inn med Google</a>
+        </div>
+        
+        <div class="workout-form">
+            <h2>Legg til treningsøkt</h2>
+            <form id="workoutForm">
+                <div class="form-group">
+                    <label for="workoutType">Type trening:</label>
+                    <select id="workoutType" required>
+                        <option value="">Velg type</option>
+                        <option value="Løping">Løping</option>
+                        <option value="Styrketrening">Styrketrening</option>
+                        <option value="Yoga">Yoga</option>
+                        <option value="Svømming">Svømming</option>
+                        <option value="Sykling">Sykling</option>
+                        <option value="Annet">Annet</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="workoutName">Navn på økt:</label>
+                    <input type="text" id="workoutName" placeholder="F.eks. Morgentur, Styrkeøkt 1">
+                </div>
+                
+                <div class="form-group">
+                    <label for="duration">Varighet:</label>
+                    <input type="text" id="duration" placeholder="F.eks. 30 min, 1 time" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="day">Dag:</label>
+                    <select id="day" required>
+                        <option value="">Velg dag</option>
+                        <option value="Mandag">Mandag</option>
+                        <option value="Tirsdag">Tirsdag</option>
+                        <option value="Onsdag">Onsdag</option>
+                        <option value="Torsdag">Torsdag</option>
+                        <option value="Fredag">Fredag</option>
+                        <option value="Lørdag">Lørdag</option>
+                        <option value="Søndag">Søndag</option>
+                    </select>
+                </div>
+                
+                <button type="submit">➕ Legg til treningsøkt</button>
+            </form>
+        </div>
+        
+        <div class="workouts">
+            <h2>Mine treningsøkter</h2>
+            <div id="workoutList">
+                <p>Ingen treningsøkter lagt til ennå.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let workouts = JSON.parse(localStorage.getItem('workouts')) || [];
+        
+        function displayWorkouts() {
+            const workoutList = document.getElementById('workoutList');
+            if (workouts.length === 0) {
+                workoutList.innerHTML = '<p>Ingen treningsøkter lagt til ennå.</p>';
+                return;
+            }
+            
+            workoutList.innerHTML = workouts.map(workout => `
+                <div class="workout-item">
+                    <div class="workout-type">${workout.type}</div>
+                    <div class="workout-details">
+                        ${workout.name ? workout.name + ' • ' : ''}${workout.duration} • ${workout.day}
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        document.getElementById('workoutForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const workout = {
+                type: document.getElementById('workoutType').value,
+                name: document.getElementById('workoutName').value,
+                duration: document.getElementById('duration').value,
+                day: document.getElementById('day').value,
+                timestamp: new Date().toISOString()
+            };
+            
+            workouts.push(workout);
+            localStorage.setItem('workouts', JSON.stringify(workouts));
+            displayWorkouts();
+            
+            // Reset form
+            document.getElementById('workoutForm').reset();
+        });
+        
+        function googleLogin() {
+            alert('Google OAuth fungerer ikke i denne enkle versjonen. Bruk "Legg til treningsøkt" for å teste funksjonaliteten!');
+        }
+        
+        // Display workouts on page load
+        displayWorkouts();
+    </script>
+</body>
+</html>
