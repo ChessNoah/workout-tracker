@@ -1,0 +1,273 @@
+{% extends "base.html" %}
+
+{% block title %}Hjem - Workout Tracker{% endblock %}
+{% block header %}Hjem{% endblock %}
+
+{% block content %}
+<div class="home-container">
+    <!-- Welcome Section -->
+    <div class="welcome-section">
+        <div class="welcome-content">
+            <h2>Velkommen tilbake, {{ current_user }}! ��</h2>
+            <div class="welcome-info">
+                <p>I dag er det {{ current_day }}</p>
+                <div class="streak-counter">
+                    <div class="streak-icon" id="streak-icon">
+                        🔥
+                        <div class="fire-fill" id="fire-fill"></div>
+                    </div>
+                    <span class="streak-text">Ukesstreak: {{ weekly_streak }} uker</span>
+                    <div class="streak-progress" id="streak-progress" data-streak="{{ weekly_streak }}"></div>
+                </div>
+            </div>
+            <div class="current-time">
+                <span class="time-display" id="current-time"></span>
+            </div>
+        </div>
+        <div class="welcome-actions">
+            <a href="/register" class="btn-primary btn-large">
+                <span class="btn-icon">➕</span>
+                Registrer Treningsøkt
+            </a>
+            <a href="/goals" class="btn-secondary btn-large">
+                <span class="btn-icon">🎯</span>
+                Se Mål
+            </a>
+        </div>
+        
+    </div>
+
+    <!-- Quick Actions Section -->
+    <div class="quick-actions-section">
+        <div class="section-header">
+            <h3>🚀 Raske Handlinger</h3>
+        </div>
+        
+        <div class="quick-actions-grid">
+            <a href="/register" class="quick-action-card">
+                <span class="quick-action-icon">➕</span>
+                <h4>Registrer Økt</h4>
+                <p>Legg til en ny treningsøkt</p>
+            </a>
+            
+            <a href="/goals" class="quick-action-card">
+                <span class="quick-action-icon">🎯</span>
+                <h4>Se Mål</h4>
+                <p>Se og oppdater dine mål</p>
+            </a>
+            
+            <a href="/social" class="quick-action-card">
+                <span class="quick-action-icon">👥</span>
+                <h4>Lag & Venner</h4>
+                <p>Koble deg sammen med andre</p>
+            </a>
+        </div>
+    </div>
+
+    <!-- Quick Stats Overview -->
+    <div class="stats-overview">
+        <div class="stat-card primary">
+            <div class="stat-icon">📊</div>
+            <div class="stat-content">
+                <span class="stat-number">{{ workouts|length }}</span>
+                <span class="stat-label">Totalt Antall Økter</span>
+            </div>
+        </div>
+        
+        <div class="stat-card success">
+            <div class="stat-icon">🏃</div>
+            <div class="stat-content">
+                <span class="stat-number">{{ workout_types|length }}</span>
+                <span class="stat-label">Trenings Typer</span>
+            </div>
+        </div>
+        
+        <div class="stat-card info">
+            <div class="stat-icon">📅</div>
+            <div class="stat-content">
+                <span class="stat-number">{{ workouts|map(attribute=0)|unique|list|length }}</span>
+                <span class="stat-label">Dager Med Økter</span>
+            </div>
+        </div>
+        
+        <div class="stat-card warning">
+            <div class="stat-icon">🔥</div>
+            <div class="stat-content">
+                <span class="stat-number">{{ workouts|selectattr('0', 'equalto', current_day)|list|length }}</span>
+                <span class="stat-label">I Dag</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Activity Section -->
+    <div class="recent-activity">
+        <div class="section-header">
+            <h3>📋 Siste Treningsøkter</h3>
+            <a href="/workouts_admin" class="view-all-link">Se alle →</a>
+        </div>
+        
+        {% if workouts %}
+            <div class="activity-list">
+                {% for workout in workouts[-5:]|reverse %}
+                <div class="activity-item">
+                    <div class="activity-icon">
+                        {% if workout[1] == "Løping" %}🏃
+                        {% elif workout[1] == "Styrketrening" %}💪
+                        {% elif workout[1] == "Yoga" %}🧘
+                        {% elif workout[1] == "Svømming" %}🏊
+                        {% elif workout[1] == "Sykling" %}🚴
+                        {% else %}🏋️{% endif %}
+                    </div>
+                    <div class="activity-details">
+                        <div class="activity-main">
+                            <span class="activity-type">{{ workout[1] }}</span>
+                            {% if workout[2] %}
+                            <span class="activity-name">{{ workout[2] }}</span>
+                            {% endif %}
+                        </div>
+                        <div class="activity-meta">
+                            <span class="activity-day">{{ workout[0] }}</span>
+                            <span class="activity-duration">{{ workout[3] }}</span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="no-activity">
+                <div class="empty-state">
+                    <span class="empty-icon">🏃‍♂️</span>
+                    <h4>Ingen treningsøkter enda</h4>
+                    <p>Start din fitness-reise ved å registrere din første treningsøkt!</p>
+                    <a href="/register" class="btn-primary">Registrer Første Økt</a>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Motivation Section -->
+    <div class="motivation-section">
+        <div class="motivation-content">
+            <h3>💪 Husk: Konsistens er nøkkelen!</h3>
+            <p>Hver treningsøkt teller mot ditt mål. Hold det gående!</p>
+        </div>
+        <div class="motivation-stats">
+            <div class="motivation-stat">
+                <span class="motivation-number">{{ workouts|length }}</span>
+                <span class="motivation-label">Økter Fullført</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Live clock
+    function updateTime() {
+        const now = new Date();
+        const timeString = now.toLocaleTimeString('nb-NO', { 
+            hour: '2-digit', 
+            minute: '2-digit', 
+            second: '2-digit' 
+        });
+        document.getElementById('current-time').textContent = timeString;
+    }
+    
+    setInterval(updateTime, 1000);
+    updateTime();
+
+    // Confetti function
+    function createConfetti() {
+        const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#ff9ff3', '#54a0ff', '#5f27cd'];
+        const confettiCount = 100;
+        
+        for (let i = 0; i < confettiCount; i++) {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.animationDelay = Math.random() * 2 + 's';
+            confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+            document.body.appendChild(confetti);
+            
+            // Remove confetti after animation
+            setTimeout(() => {
+                confetti.remove();
+            }, 5000);
+        }
+    }
+
+    // Success popup function
+    function showSuccessPopup(message, streakIncreased = false) {
+        const popup = document.createElement('div');
+        popup.className = 'success-popup';
+        popup.innerHTML = `
+            <h3>🎉 Bra jobbet!</h3>
+            <p>${message}</p>
+        `;
+        
+        document.body.appendChild(popup);
+        
+        // Show confetti
+        createConfetti();
+        
+        // Remove popup after 3 seconds
+        setTimeout(() => {
+            popup.remove();
+        }, 3000);
+    }
+
+    // Fire emoji fill animation
+    function animateFireFill() {
+        const fireIcon = document.getElementById('streak-icon');
+        const fireFill = document.getElementById('fire-fill');
+        
+        if (fireIcon && fireFill) {
+            // Start filling animation
+            fireFill.classList.add('filling');
+            
+            setTimeout(() => {
+                // Complete fill
+                fireFill.classList.add('complete');
+                fireIcon.classList.add('animated');
+                
+                // Show success popup
+                showSuccessPopup('Din ukesstreak har økt! 🔥', true);
+                
+                // Reset after animation
+                setTimeout(() => {
+                    fireFill.classList.remove('filling', 'complete');
+                    fireIcon.classList.remove('animated');
+                }, 2000);
+            }, 500);
+        }
+    }
+
+    // Listen for workout completion
+    document.addEventListener('DOMContentLoaded', function() {
+        // Set streak progress width based on data-streak attribute
+        const streakProgress = document.getElementById('streak-progress');
+        if (streakProgress) {
+            const streakValue = parseInt(streakProgress.getAttribute('data-streak')) || 0;
+            const progressWidth = Math.min((streakValue / 7) * 100, 100);
+            streakProgress.style.width = progressWidth + '%';
+        }
+        
+        // Check if this is a workout completion page
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('completed') === 'true') {
+            showSuccessPopup('Treningsøkten er fullført! 💪');
+        }
+        
+        // Check for streak increase
+        if (urlParams.get('streak_increased') === 'true') {
+            setTimeout(() => {
+                animateFireFill();
+            }, 1000);
+        }
+    });
+
+    // Function to trigger fire animation (can be called from other pages)
+    window.triggerFireAnimation = function() {
+        animateFireFill();
+    };
+</script>
+{% endblock %}

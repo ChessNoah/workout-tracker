@@ -1,0 +1,47 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Vercel
+.vercel
+
+# Environment variables - VIKTIG: Beskytter dine hemmeligheter!
+.env
+.env.local
+.env.production
+.env.*
+google_credentials.env
+google_config.env
+firebase_config.json
+
+# Firebase credentials
+firebase_config.json
+firestore.rules
+FIREBASE_SETUP.md
+
+# Google OAuth credentials
+google_credentials.env
+google_config.env
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Backup files
+*.bak
+*.backup

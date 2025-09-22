@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Workout Tracker{% endblock %}</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <h1>{% block header %}Workout Tracker{% endblock %}</h1>
+            {% if current_user %}
+            <div class="user-info">
+                <span>Bruker: {{ current_user }}</span>
+                <a href="/settings" class="settings-link">⚙️ Innstillinger</a>
+                <form method="POST" action="/logout" style="display: inline;">
+                    <button type="submit" class="settings-link logout-btn">🚪 Logg ut</button>
+                </form>
+            </div>
+            {% endif %}
+        </header>
+
+        <!-- Flash messages removed - not available in FastAPI -->
+
+        <main class="main-content">
+            {% block content %}{% endblock %}
+        </main>
+
+        {% if current_user %}
+        <nav class="bottom-nav">
+            <a href="/home" class="nav-item" id="nav-home">
+                <span class="nav-icon">🏋️</span>
+            </a>
+            <a href="/workouts_admin" class="nav-item" id="nav-workouts-admin">
+                <span class="nav-icon">📊</span>
+            </a>
+            <a href="/goals" class="nav-item" id="nav-goals">
+                <span class="nav-icon">📅</span>
+            </a>
+            <a href="/social" class="nav-item" id="nav-social">
+                <span class="nav-icon">👥</span>
+            </a>
+        </nav>
+        {% endif %}
+    </div>
+
+    <script>
+        // Set active navigation based on current page
+        document.addEventListener('DOMContentLoaded', function() {
+            const path = window.location.pathname;
+            const navItems = document.querySelectorAll('.nav-item');
+            
+            navItems.forEach(item => {
+                if (item.getAttribute('href') === path) {
+                    item.classList.add('active');
+                }
+            });
+            
+            // Special handling for workouts_admin route
+            if (path === '/workouts_admin') {
+                const workoutsAdminNav = document.getElementById('nav-workouts-admin');
+                if (workoutsAdminNav) {
+                    workoutsAdminNav.classList.add('active');
+                }
+            }
+            
+            // Load dark mode preference on all pages
+            const savedDarkMode = localStorage.getItem('darkMode');
+            if (savedDarkMode === 'true') {
+                document.body.classList.add('dark-mode');
+            }
+        });
+    </script>
+</body>
+</html>

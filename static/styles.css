@@ -1,0 +1,3154 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background-color: #f8fafc;
+    color: #1e293b;
+    line-height: 1.6;
+}
+
+/* App container */
+.app-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+.app-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.app-header h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.user-info {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.settings-link {
+    color: white;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    transition: all 0.2s ease;
+    font-size: 0.85rem;
+}
+
+.settings-link:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+}
+
+.logout-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+.logout-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+}
+
+/* Flash Messages */
+.flash-messages {
+    position: fixed;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    width: 90%;
+    max-width: 400px;
+}
+
+.flash-message {
+    background: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    margin: 8px 0;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Main content */
+.main-content {
+    flex: 1;
+    padding: 1.5rem;
+    padding-bottom: 5rem; /* Add space for fixed bottom navigation */
+    overflow-y: auto;
+}
+
+/* Bottom navigation */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    border-top: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: space-around;
+    padding: 0.75rem 0;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+    z-index: 1000;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #64748b;
+    transition: all 0.2s ease;
+    padding: 0.5rem;
+    border-radius: 8px;
+}
+
+.nav-item:hover {
+    color: #93c5fd;
+    background-color: #f1f5f9;
+}
+
+.nav-item.active {
+    color: #93c5fd;
+    font-weight: 600;
+}
+
+.nav-icon {
+    font-size: 1.5rem;
+    margin-bottom: 0.25rem;
+}
+
+/* Forms */
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-row {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: end;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #374151;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #93c5fd;
+    box-shadow: 0 0 0 3px rgba(147, 197, 253, 0.1);
+}
+
+/* Duration Input Group */
+.duration-input-group {
+    margin-top: 10px;
+}
+
+.time-inputs {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.time-input-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.time-input {
+    width: 80px;
+    padding: 12px;
+    border: 2px solid #e1e5e9;
+    border-radius: 8px;
+    font-size: 16px;
+    text-align: center;
+    background: white;
+    transition: all 0.3s ease;
+}
+
+.time-input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.time-label {
+    font-size: 14px;
+    color: #666;
+    font-weight: 500;
+    text-align: center;
+}
+
+/* Dark mode styles for time inputs */
+.dark-mode .time-input {
+    background: #2d3748;
+    border-color: #4a5568;
+    color: #e2e8f0;
+}
+
+.dark-mode .time-input:focus {
+    border-color: #63b3ed;
+    box-shadow: 0 0 0 3px rgba(99, 179, 237, 0.1);
+}
+
+.dark-mode .time-label {
+    color: #a0aec0;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: #93c5fd;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btn-primary:hover {
+    background-color: #7dd3fc;
+}
+
+.btn-secondary {
+    background-color: #6b7280;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.2s ease;
+}
+
+.btn-secondary:hover {
+    background-color: #4b5563;
+}
+
+.btn-danger {
+    background-color: #ef4444;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btn-danger:hover {
+    background-color: #dc2626;
+}
+
+.copy-btn {
+    background-color: #10b981;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.copy-btn:hover {
+    background-color: #059669;
+}
+
+/* Login page */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+}
+
+.login-form {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+.login-form h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #1e293b;
+}
+
+.login-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.login-actions .btn-primary,
+.login-actions .btn-secondary {
+    flex: 1;
+    text-align: center;
+    text-decoration: none;
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.login-actions .btn-secondary {
+    background-color: #6b7280;
+    color: white;
+    border: none;
+}
+
+.login-actions .btn-secondary:hover {
+    background-color: #4b5563;
+    transform: translateY(-1px);
+}
+
+/* Google OAuth Button */
+.btn-google {
+    background-color: #4285f4;
+    color: white;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    margin-top: 1rem;
+    padding: 12px 16px;
+    border-radius: 6px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.btn-google:hover {
+    background-color: #3367d6;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(66, 133, 244, 0.3);
+}
+
+.google-icon {
+    width: 18px;
+    height: 18px;
+    background: white;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+    color: #4285f4;
+}
+
+/* Divider */
+.login-divider {
+    text-align: center;
+    margin: 1.5rem 0;
+    position: relative;
+}
+
+.login-divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: #e2e8f0;
+}
+
+.login-divider span {
+    background: white;
+    padding: 0 1rem;
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+.demo-info {
+    margin-top: 2rem;
+    padding: 1rem;
+    background-color: #f1f5f9;
+    border-radius: 6px;
+    font-size: 0.9rem;
+}
+
+.signup-link {
+    margin-top: 1rem;
+    text-align: center;
+    padding: 1rem;
+    border-top: 1px solid #e2e8f0;
+}
+
+.link-primary {
+    color: #3b82f6;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.link-primary:hover {
+    text-decoration: underline;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: auto;
+    margin: 0;
+}
+
+/* Signup page */
+.signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+}
+
+.signup-form {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+.signup-form h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #1e293b;
+}
+
+.error-message {
+    background-color: #fef2f2;
+    color: #dc2626;
+    padding: 0.75rem;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    border: 1px solid #fecaca;
+    font-size: 0.9rem;
+}
+
+.signup-footer {
+    margin-top: 2rem;
+    text-align: center;
+    padding: 1rem;
+    border-top: 1px solid #e2e8f0;
+}
+
+.signup-form small {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 0.8rem;
+    color: #64748b;
+    font-style: italic;
+}
+
+/* Home page */
+.home-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.welcome-section {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding: 2rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.welcome-section h2 {
+    color: #1e293b;
+    margin-bottom: 0.5rem;
+}
+
+.stats-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #60a5fa;
+}
+
+.quick-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.quick-actions-section {
+    margin-bottom: 2rem;
+}
+
+.quick-actions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.quick-action-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    text-decoration: none;
+    color: inherit;
+    text-align: center;
+    transition: all 0.2s ease;
+    border: 2px solid transparent;
+}
+
+.quick-action-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-color: #3b82f6;
+}
+
+.quick-action-icon {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.quick-action-card h4 {
+    color: #1e293b;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.quick-action-card p {
+    color: #64748b;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+/* Register page */
+.register-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.workout-form {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 2rem;
+}
+
+.recent-workouts {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Done page */
+.done-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.split-layout {
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    gap: 2rem;
+}
+
+.left-section,
+.right-section {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.filters {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.filter-group {
+    min-width: 150px;
+}
+
+.workout-list-container {
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+/* Goals page */
+.goals-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.goals-section {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 2rem;
+}
+
+.goals-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.tab-button {
+    background: #f1f5f9;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.tab-button.active {
+    background: #93c5fd;
+    color: white;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.goals-list {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.goal-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+/* Social page */
+.social-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.my-code-section {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.code-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.code-text {
+    font-family: 'Courier New', monospace;
+    font-size: 1.1rem;
+    background: #f1f5f9;
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    border: 2px solid #e2e8f0;
+}
+
+.code-info {
+    color: #6b7280;
+    font-size: 0.9rem;
+}
+
+.social-sections {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.team-section,
+.friends-section {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.create-join {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.team-form,
+.friend-form {
+    background: #f8fafc;
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.team-list,
+.friend-list {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.team-item,
+.friend-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem;
+    border-bottom: 1px solid #e2e8f0;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.team-item:hover {
+    background-color: #f1f5f9;
+}
+
+.team-arrow {
+    color: #6b7280;
+    font-weight: bold;
+}
+
+/* Team page */
+.team-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.team-header {
+    margin-bottom: 1.5rem;
+}
+
+.back-link {
+    color: #93c5fd;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+.team-info {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 2rem;
+}
+
+.team-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.stat-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem;
+    background: #f8fafc;
+    border-radius: 6px;
+}
+
+.team-sections {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.members-section,
+.plans-section {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.add-plan {
+    background: #f8fafc;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+}
+
+.members-list,
+.plan-list {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.member-item,
+.plan-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.member-badge {
+    background: #93c5fd;
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+}
+
+/* Settings page */
+.settings-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.back-section {
+    margin-bottom: 20px;
+}
+
+.back-link {
+    color: #60a5fa;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 6px;
+    background: #f1f5f9;
+    transition: all 0.2s ease;
+    display: inline-block;
+}
+
+.back-link:hover {
+    background: #e2e8f0;
+    transform: translateX(-2px);
+}
+
+.user-info-section,
+.appearance-section,
+.actions-section,
+.app-info-section {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 1.5rem;
+}
+
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.detail-item:last-child {
+    border-bottom: none;
+}
+
+.detail-label {
+    font-weight: 500;
+    color: #374151;
+}
+
+.detail-value {
+    color: #6b7280;
+}
+
+.action-buttons {
+    margin-top: 1rem;
+}
+
+/* Workout items */
+.workout-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem;
+    border-bottom: 1px solid #e2e8f0;
+    background: white;
+    margin-bottom: 0.5rem;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.workout-day,
+.workout-type,
+.workout-name,
+.workout-duration {
+    flex: 1;
+    text-align: center;
+}
+
+.workout-day {
+    color: #6b7280;
+    font-size: 0.9rem;
+}
+
+.workout-type {
+    color: #93c5fd;
+    font-weight: 500;
+}
+
+.workout-name {
+    font-weight: 500;
+}
+
+.workout-duration {
+    color: #059669;
+    font-weight: 600;
+}
+
+.friend-workout .friend-name {
+    color: #7c3aed;
+    font-weight: 500;
+}
+
+/* Utility classes */
+.no-workouts,
+.no-goals,
+.no-teams,
+.no-friends,
+.no-members,
+.no-plans {
+    text-align: center;
+    color: #6b7280;
+    font-style: italic;
+    padding: 2rem;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .split-layout {
+        grid-template-columns: 1fr;
+    }
+    
+    .social-sections {
+        grid-template-columns: 1fr;
+    }
+    
+    .team-sections {
+        grid-template-columns: 1fr;
+    }
+    
+    .form-row {
+        flex-direction: column;
+    }
+    
+    .create-join {
+        grid-template-columns: 1fr;
+    }
+    
+    .quick-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .stats-section {
+        grid-template-columns: 1fr;
+    }
+    
+    .main-content {
+        padding: 1rem;
+    }
+    
+    .app-header {
+        padding: 1rem;
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+    }
+    
+    .user-info {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .settings-link {
+        font-size: 0.8rem;
+        padding: 6px 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .workout-item {
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+    }
+    
+    .workout-day,
+    .workout-type,
+    .workout-name,
+    .workout-duration {
+        flex: none;
+    }
+}
+
+/* Dark Mode Styles */
+/* Alternative lysere blå farger for dark mode:
+   #93c5fd - Nåværende (enda lysere blå)
+   #7dd3fc - Cyan-blå
+   #38bdf8 - Himmelsblå
+*/
+.dark-mode {
+    background-color: #1a1a1a;
+    color: #e5e5e5;
+}
+
+.dark-mode .app-container {
+    background-color: #1a1a1a;
+}
+
+.dark-mode .main-content {
+    background-color: #1a1a1a;
+    color: #e5e5e5;
+}
+
+.dark-mode .bottom-nav {
+    background-color: #2d2d2d;
+    border-top-color: #404040;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+.dark-mode .nav-item {
+    color: #a0a0a0;
+}
+
+.dark-mode .nav-item:hover {
+    background-color: #404040;
+}
+
+.dark-mode .nav-item.active {
+    color: #93c5fd; /* Enda lysere blå */
+}
+
+/* Dark mode for all white boxes and cards */
+.dark-mode .login-form,
+.dark-mode .welcome-section,
+.dark-mode .stat-card,
+.dark-mode .workout-form,
+.dark-mode .recent-workouts,
+.dark-mode .left-section,
+.dark-mode .right-section,
+.dark-mode .goals-section,
+.dark-mode .my-code-section,
+.dark-mode .team-section,
+.dark-mode .friends-section,
+.dark-mode .team-info,
+.dark-mode .members-section,
+.dark-mode .plans-section {
+    background-color: #2d2d2d;
+    border-color: #404040;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Dark mode for welcome section text */
+.dark-mode .welcome-section h2 {
+    color: #e5e5e5;
+}
+
+.dark-mode .welcome-section p {
+    color: #e5e5e5;
+}
+
+.dark-mode .streak-counter {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.dark-mode .streak-text {
+    color: #e5e5e5;
+}
+
+.dark-mode .workout-item,
+.dark-mode .goal-item,
+.dark-mode .team-item,
+.dark-mode .friend-item,
+.dark-mode .member-item,
+.dark-mode .plan-item {
+    background-color: #2d2d2d;
+    border-color: #404040;
+}
+
+.dark-mode .workout-item:hover,
+.dark-mode .goal-item:hover,
+.dark-mode .team-item:hover,
+.dark-mode .friend-item:hover,
+.dark-mode .member-item:hover,
+.dark-mode .plan-item:hover {
+    background-color: #404040;
+}
+
+.dark-mode .form-group input,
+.dark-mode .form-group select,
+.dark-mode .form-group textarea {
+    background-color: #2d2d2d;
+    border-color: #404040;
+    color: #e5e5e5;
+}
+
+.dark-mode .form-group input:focus,
+.dark-mode .form-group select:focus,
+.dark-mode .form-group textarea:focus {
+    border-color: #93c5fd;
+    box-shadow: 0 0 0 3px rgba(147, 197, 253, 0.2);
+}
+
+.dark-mode .form-group label {
+    color: #e5e5e5;
+}
+
+.dark-mode .btn-primary {
+    background-color: #93c5fd; /* Enda lysere blå */
+    color: white;
+}
+
+.dark-mode .btn-secondary {
+    background-color: #6b7280;
+    color: white;
+}
+
+.dark-mode .btn-danger {
+    background-color: #ef4444;
+    color: white;
+}
+
+.dark-mode .copy-btn {
+    background-color: #10b981;
+    color: white;
+}
+
+.dark-mode .demo-info {
+    background-color: #404040;
+    color: #e5e5e5;
+}
+
+.dark-mode .code-text {
+    background-color: #404040;
+    border-color: #606060;
+    color: #e5e5e5;
+}
+
+.dark-mode .code-info {
+    color: #a0a0a0;
+}
+
+.dark-mode .team-form,
+.dark-mode .friend-form,
+.dark-mode .add-plan {
+    background-color: #404040;
+    color: #e5e5e5;
+}
+
+.dark-mode .stat-item {
+    background-color: #404040;
+    color: #e5e5e5;
+}
+
+.dark-mode .tab-button {
+    background-color: #404040;
+    color: #e5e5e5;
+}
+
+.dark-mode .tab-button.active {
+    background-color: #93c5fd; /* Enda lysere blå */
+    color: white;
+}
+
+.dark-mode .stat-number {
+    color: #93c5fd; /* Enda lysere blå */
+}
+
+.dark-mode .back-link {
+    color: #93c5fd; /* Enda lysere blå */
+}
+
+.dark-mode .member-badge {
+    background-color: #93c5fd; /* Enda lysere blå */
+    color: white;
+}
+
+.dark-mode .recurring-badge {
+    background-color: #f59e0b;
+    color: white;
+}
+
+.dark-mode .upcoming-badge {
+    background-color: #06b6d4;
+    color: white;
+}
+
+.dark-mode .team-arrow {
+    color: #a0a0a0;
+}
+
+.dark-mode .workout-day {
+    color: #a0a0a0;
+}
+
+.dark-mode .workout-type {
+    color: #93c5fd; /* Enda lysere blå */
+}
+
+.dark-mode .workout-name {
+    color: #e5e5e5;
+}
+
+.dark-mode .workout-duration {
+    color: #10b981;
+}
+
+.dark-mode .friend-workout .friend-name {
+    color: #a855f7;
+}
+
+.dark-mode .no-workouts,
+.dark-mode .no-goals,
+.dark-mode .no-teams,
+.dark-mode .no-friends,
+.dark-mode .no-members,
+.dark-mode .no-plans {
+    color: #a0a0a0;
+}
+
+.dark-mode .settings-container .user-info-section,
+.dark-mode .settings-container .appearance-section,
+.dark-mode .settings-container .actions-section,
+.dark-mode .settings-container .app-info-section {
+    background-color: #2d2d2d;
+    border-color: #404040;
+}
+
+.dark-mode .detail-item {
+    border-bottom-color: #404040;
+}
+
+.dark-mode .detail-label {
+    color: #a0a0a0;
+}
+
+.dark-mode .detail-value {
+    color: #e5e5e5;
+}
+
+/* Dark Mode Toggle Switch */
+.appearance-section {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.dark-mode .appearance-section {
+    background-color: #2d2d2d;
+    border-color: #404040;
+}
+
+.dark-mode-toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.toggle-label {
+    font-weight: 500;
+    color: #374151;
+}
+
+.dark-mode .toggle-label {
+    color: #e5e5e5;
+}
+
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.toggle-input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 34px;
+}
+
+.toggle-slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+.toggle-input:checked + .toggle-slider {
+    background-color: #60a5fa;
+}
+
+.toggle-input:checked + .toggle-slider:before {
+    transform: translateX(26px);
+}
+
+.setting-description {
+    color: #6b7280;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.dark-mode .setting-description {
+    color: #a0a0a0;
+}
+
+/* Manage Types Page */
+.manage-types-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.types-section, .add-type-section, .stats-section {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.types-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.type-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+}
+
+.type-name {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+}
+
+.type-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-edit, .btn-delete {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.btn-edit:hover {
+    background: #e3f2fd;
+}
+
+.btn-delete:hover {
+    background: #ffebee;
+}
+
+.add-type-form {
+    display: flex;
+    gap: 15px;
+    align-items: end;
+}
+
+.add-type-form .form-group {
+    flex: 1;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.stat-card {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    border: 1px solid #e9ecef;
+}
+
+.stat-type {
+    display: block;
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.stat-count {
+    display: block;
+    font-size: 24px;
+    color: #007bff;
+    font-weight: 700;
+}
+
+.no-types, .no-stats {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    padding: 20px;
+}
+
+/* Message Display */
+.message-display {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 20px;
+    border-radius: 8px;
+    font-weight: 500;
+    z-index: 10000;
+    max-width: 400px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    animation: slideInRight 0.3s ease-out;
+}
+
+.message-display.success {
+    background-color: #10b981;
+    color: white;
+    border-left: 4px solid #059669;
+}
+
+.message-display.error {
+    background-color: #ef4444;
+    color: white;
+    border-left: 4px solid #dc2626;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Dark mode styles for manage types */
+.dark-mode .types-section,
+.dark-mode .add-type-section,
+.dark-mode .stats-section {
+    background: #2d3748;
+    border-color: #4a5568;
+}
+
+.dark-mode .type-item {
+    background: #4a5568;
+    border-color: #718096;
+}
+
+.dark-mode .type-name {
+    color: #e2e8f0;
+}
+
+.dark-mode .stat-card {
+    background: #4a5568;
+    border-color: #718096;
+}
+
+.dark-mode .stat-type {
+    color: #e2e8f0;
+}
+
+.dark-mode .stat-count {
+    color: #63b3ed;
+}
+
+.dark-mode .no-types,
+.dark-mode .no-stats {
+    color: #a0aec0;
+}
+
+/* Progress Bars for Goals */
+.goal-progress-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 20px;
+    background: #e9ecef;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #28a745, #20c997);
+    border-radius: 10px;
+    transition: width 0.3s ease;
+    position: relative;
+}
+
+.progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.progress-text {
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+}
+
+/* Dark mode styles for progress bars */
+.dark-mode .progress-bar {
+    background: #4a5568;
+}
+
+.dark-mode .progress-fill {
+    background: linear-gradient(90deg, #48bb78, #38b2ac);
+}
+
+.dark-mode .progress-text {
+    color: #a0aec0;
+}
+
+/* Dark mode styles for settings */
+.dark-mode .back-link {
+    color: #93c5fd;
+    background: #404040;
+}
+
+.dark-mode .back-link:hover {
+    background: #4a5568;
+}
+
+.dark-mode .settings-container .user-info-section,
+.dark-mode .settings-container .appearance-section,
+.dark-mode .settings-container .actions-section,
+.dark-mode .settings-container .app-info-section {
+    background-color: #2d2d2d;
+    border-color: #404040;
+}
+
+/* Combined Workouts Admin Page */
+.workouts-admin-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.admin-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 10px;
+}
+
+.admin-tabs .tab-button {
+    background: #f1f5f9;
+    border: none;
+    padding: 15px 25px;
+    border-radius: 8px 8px 0 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #64748b;
+}
+
+.admin-tabs .tab-button:hover {
+    background: #e2e8f0;
+    color: #475569;
+}
+
+.admin-tabs .tab-button.active {
+    background: #93c5fd;
+    color: white;
+    transform: translateY(-2px);
+}
+
+.tab-icon {
+    font-size: 18px;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Workouts Section */
+.workouts-section {
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.workouts-section h3 {
+    margin-bottom: 20px;
+    color: #1e293b;
+    font-size: 20px;
+}
+
+/* Overview Stats */
+.overview-stats {
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+.overview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.overview-card {
+    background: #f8fafc;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    border: 1px solid #e2e8f0;
+}
+
+.overview-label {
+    display: block;
+    font-size: 14px;
+    color: #64748b;
+    margin-bottom: 8px;
+}
+
+.overview-number {
+    display: block;
+    font-size: 28px;
+    font-weight: 700;
+    color: #93c5fd;
+}
+
+/* Dark mode styles for workouts admin */
+.dark-mode .workouts-section,
+.dark-mode .overview-stats {
+    background-color: #2d2d2d;
+    border-color: #404040;
+}
+
+.dark-mode .admin-tabs {
+    border-bottom-color: #404040;
+}
+
+.dark-mode .admin-tabs .tab-button {
+    background: #404040;
+    color: #a0a0a0;
+}
+
+.dark-mode .admin-tabs .tab-button:hover {
+    background: #4a5568;
+    color: #cbd5e0;
+}
+
+.dark-mode .admin-tabs .tab-button.active {
+    background: #93c5fd; /* Enda lysere blå for bedre synlighet */
+    color: white;
+}
+
+.dark-mode .overview-card {
+    background: #404040;
+    border-color: #4a5568;
+}
+
+.dark-mode .overview-label {
+    color: #a0aec0;
+}
+
+.dark-mode .overview-number {
+    color: #93c5fd; /* Enda lysere blå for bedre synlighet */
+}
+
+/* Social page improvements */
+.code-details {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f8fafc;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+}
+
+.code-details p {
+    margin: 8px 0;
+    font-size: 14px;
+    color: #64748b;
+}
+
+.code-details strong {
+    color: #374151;
+}
+
+.add-friend {
+    background: #f8fafc;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #e2e8f0;
+}
+
+.add-friend h4 {
+    margin-bottom: 15px;
+    color: #1e293b;
+    font-size: 16px;
+}
+
+.add-friend p {
+    margin-bottom: 15px;
+    color: #64748b;
+    font-size: 14px;
+}
+
+.add-friend .form-group {
+    margin-bottom: 15px;
+}
+
+.add-friend input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e1e5e9;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.add-friend input[type="text"]:focus {
+    outline: none;
+    border-color: #60a5fa;
+    box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.1);
+}
+
+.friends-list {
+    margin-top: 20px;
+}
+
+.friend-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    background: white;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #e2e8f0;
+    transition: all 0.2s ease;
+}
+
+.friend-item:hover {
+    background: #f1f5f9;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.friend-name {
+    font-weight: 500;
+    color: #1e293b;
+}
+
+/* Dark mode styles for social page */
+.dark-mode .code-details {
+    background: #404040;
+    border-color: #4a5568;
+}
+
+.dark-mode .code-details p {
+    color: #a0aec0;
+}
+
+.dark-mode .code-details strong {
+    color: #e2e8f0;
+}
+
+.dark-mode .add-friend {
+    background: #404040;
+    border-color: #4a5568;
+}
+
+.dark-mode .add-friend h4 {
+    color: #e5e5e5;
+}
+
+.dark-mode .add-friend p {
+    color: #a0aec0;
+}
+
+.dark-mode .add-friend input[type="text"] {
+    background: #2d2d2d;
+    border-color: #4a5568;
+    color: #e5e5e5;
+}
+
+.dark-mode .add-friend input[type="text"]:focus {
+    border-color: #93c5fd;
+    box-shadow: 0 0 0 3px rgba(147, 197, 253, 0.2);
+}
+
+.dark-mode .friend-item {
+    background: #2d2d2d;
+    border-color: #404040;
+}
+
+.dark-mode .friend-item:hover {
+    background: #404040;
+}
+
+.dark-mode .friend-name {
+    color: #e5e5e5;
+}
+
+.dark-mode .friend-since {
+    color: #a0a0a0;
+}
+
+/* Workout List Styling */
+.workout-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.workout-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    background: white;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    transition: all 0.2s ease;
+}
+
+.workout-item:hover {
+    background: #f8fafc;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.workout-day,
+.workout-type,
+.workout-name,
+.workout-duration {
+    flex: 1;
+    text-align: center;
+    padding: 0 8px;
+}
+
+.workout-day {
+    color: #64748b;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.workout-type {
+    color: #93c5fd;
+    font-weight: 600;
+}
+
+.workout-name {
+    font-weight: 500;
+    color: #1e293b;
+}
+
+.workout-duration {
+    color: #059669;
+    font-weight: 600;
+}
+
+/* Dark mode for workout items */
+.dark-mode .workout-item {
+    background: #2d2d2d;
+    border-color: #404040;
+}
+
+.dark-mode .workout-item:hover {
+    background: #404040;
+}
+
+.dark-mode .workout-day {
+    color: #a0aec0;
+}
+
+.dark-mode .workout-type {
+    color: #60a5fa;
+}
+
+.dark-mode .workout-name {
+    color: #e5e5e5;
+}
+
+.dark-mode .workout-duration {
+    color: #10b981;
+}
+
+/* New Home Dashboard Styles */
+.home-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Welcome Section */
+.welcome-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 25px 30px;
+    border-radius: 20px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.welcome-content h2 {
+    font-size: 2rem;
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+.welcome-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 15px;
+}
+
+.welcome-info p {
+    font-size: 1rem;
+    margin: 0;
+    opacity: 0.9;
+}
+
+.streak-counter {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 8px 15px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    position: relative;
+}
+
+.streak-icon {
+    font-size: 1.2rem;
+    position: relative;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.fire-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, #ff6b35, #f7931e, #ffd700);
+    border-radius: 50%;
+    transform: scale(0);
+    transition: transform 0.5s ease;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.fire-fill.filling {
+    transform: scale(1);
+}
+
+.fire-fill.complete {
+    transform: scale(1.2);
+    animation: fire-pop 0.6s ease-out;
+}
+
+@keyframes fire-pop {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.3);
+    }
+    100% {
+        transform: scale(1.2);
+    }
+}
+
+.streak-icon.animated {
+    animation: streak-bounce 0.6s ease-out;
+}
+
+@keyframes streak-bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+/* Weekly Streak Counter */
+.streak-text {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.streak-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #ff6b35, #f7931e, #ffd700);
+    border-radius: 0 0 20px 20px;
+    transition: width 0.5s ease;
+}
+
+/* Dark mode for new elements */
+.dark-mode .success-popup {
+    background: linear-gradient(135deg, #059669, #047857);
+}
+
+.dark-mode .streak-progress {
+    background: linear-gradient(90deg, #ff6b35, #f7931e, #ffd700);
+}
+
+/* Inline form styling */
+.inline-form {
+    display: inline;
+}
+
+.current-time {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 12px 20px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+}
+
+.time-display {
+    font-size: 1.3rem;
+    font-weight: 600;
+    font-family: 'Courier New', monospace;
+}
+
+.welcome-actions {
+    display: flex;
+    gap: 15px;
+    flex-direction: column;
+}
+
+.btn-large {
+    padding: 15px 30px;
+    font-size: 1.1rem;
+    border-radius: 12px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+.btn-large:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.btn-icon {
+    font-size: 1.3rem;
+}
+
+/* Stats Overview */
+.stats-overview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.stat-card {
+    background: white;
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    transition: all 0.3s ease;
+    border-left: 5px solid;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.stat-card.primary {
+    border-left-color: #93c5fd;
+}
+
+.stat-card.success {
+    border-left-color: #10b981;
+}
+
+.stat-card.info {
+    border-left-color: #06b6d4;
+}
+
+.stat-card.warning {
+    border-left-color: #f59e0b;
+}
+
+.stat-icon {
+    font-size: 2.5rem;
+    opacity: 0.8;
+}
+
+.stat-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1e293b;
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: #64748b;
+    margin-top: 5px;
+    font-weight: 500;
+}
+
+/* Recent Activity */
+.recent-activity {
+    background: white;
+    border-radius: 16px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.section-header h3 {
+    font-size: 1.5rem;
+    color: #1e293b;
+    margin: 0;
+}
+
+.view-all-link {
+    color: #93c5fd;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.view-all-link:hover {
+    color: #7dd3fc;
+}
+
+.activity-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.activity-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    background: #f8fafc;
+    border-radius: 12px;
+    transition: all 0.2s ease;
+}
+
+.activity-item:hover {
+    background: #f1f5f9;
+    transform: translateX(5px);
+}
+
+.activity-icon {
+    font-size: 2rem;
+    width: 50px;
+    text-align: center;
+}
+
+.activity-details {
+    flex: 1;
+}
+
+.activity-main {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 8px;
+}
+
+.activity-type {
+    font-weight: 600;
+    color: #1e293b;
+    font-size: 1.1rem;
+}
+
+.activity-name {
+    color: #64748b;
+    font-style: italic;
+}
+
+.activity-meta {
+    display: flex;
+    gap: 20px;
+    font-size: 0.9rem;
+    color: #64748b;
+}
+
+.activity-day {
+    font-weight: 500;
+}
+
+.activity-duration {
+    color: #10b981;
+    font-weight: 600;
+}
+
+/* Empty State */
+.no-activity {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.empty-state {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.empty-icon {
+    font-size: 4rem;
+    display: block;
+    margin-bottom: 20px;
+    opacity: 0.6;
+}
+
+.empty-state h4 {
+    color: #1e293b;
+    margin-bottom: 10px;
+    font-size: 1.3rem;
+}
+
+.empty-state p {
+    color: #64748b;
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+/* Quick Actions Grid */
+.quick-actions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.action-card {
+    background: white;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.action-card:hover {
+    border-color: #93c5fd;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.action-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.action-card h4 {
+    color: #1e293b;
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+}
+
+.action-card p {
+    color: #64748b;
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+.action-link {
+    color: #93c5fd;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+.action-link:hover {
+    color: #7dd3fc;
+}
+
+/* Motivation Section */
+.motivation-section {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+    padding: 40px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.motivation-content h3 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.motivation-content p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin: 0;
+}
+
+.motivation-stats {
+    text-align: center;
+}
+
+.motivation-number {
+    display: block;
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.motivation-label {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+/* Dark Mode Styles for Home */
+.dark-mode .stat-card {
+    background: #2d2d2d;
+    border-color: #404040;
+}
+
+.dark-mode .stat-number {
+    color: #e5e5e5;
+}
+
+.dark-mode .stat-label {
+    color: #a0aec0;
+}
+
+.dark-mode .recent-activity {
+    background: #2d2d2d;
+    border-color: #404040;
+}
+
+.dark-mode .section-header h3 {
+    color: #e5e5e5;
+}
+
+.dark-mode .activity-item {
+    background: #404040;
+}
+
+.dark-mode .activity-item:hover {
+    background: #4a5568;
+}
+
+.dark-mode .activity-type {
+    color: #e5e5e5;
+}
+
+.dark-mode .activity-name {
+    color: #a0aec0;
+}
+
+.dark-mode .action-card {
+    background: #2d2d2d;
+    border-color: #404040;
+}
+
+.dark-mode .action-card h4 {
+    color: #e5e5e5;
+}
+
+.dark-mode .action-card p {
+    color: #a0aec0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .welcome-section {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+        padding: 30px 20px;
+    }
+    
+    .welcome-content h2 {
+        font-size: 2rem;
+    }
+    
+    .stats-overview {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+    }
+    
+    .stat-card {
+        padding: 20px;
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+    
+    .quick-actions-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .motivation-section {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+        padding: 30px 20px;
+    }
+    
+    .activity-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+    
+    .activity-main {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .activity-meta {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .home-container {
+        padding: 15px;
+    }
+    
+    .welcome-section {
+        padding: 25px 15px;
+    }
+    
+    .welcome-content h2 {
+        font-size: 1.8rem;
+    }
+    
+    .stat-number {
+        font-size: 2rem;
+    }
+    
+    .action-card {
+        padding: 25px 20px;
+    }
+}
+
+/* Planned Workouts Styles */
+.planned-workouts-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.create-section {
+    background: white;
+    border-radius: 16px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.create-section h3 {
+    margin-bottom: 25px;
+    color: #1e293b;
+    font-size: 1.5rem;
+}
+
+.planned-workout-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    align-items: end;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: auto;
+    margin: 0;
+}
+
+/* Planned Workouts List */
+.planned-list-section {
+    background: white;
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.planned-list-section h3 {
+    margin-bottom: 25px;
+    color: #1e293b;
+    font-size: 1.5rem;
+}
+
+.planned-workouts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.planned-workout-item {
+    background: #f8fafc;
+    border-radius: 12px;
+    padding: 25px;
+    border: 2px solid #e2e8f0;
+    transition: all 0.3s ease;
+}
+
+.planned-workout-item:hover {
+    background: #f1f5f9;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.planned-workout-item.completed {
+    background: #f0fdf4;
+    border-color: #10b981;
+    opacity: 0.8;
+}
+
+.workout-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.workout-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.workout-type-icon {
+    font-size: 2.5rem;
+    width: 60px;
+    text-align: center;
+}
+
+.workout-details h4 {
+    color: #1e293b;
+    margin-bottom: 8px;
+    font-size: 1.3rem;
+}
+
+.workout-name {
+    color: #64748b;
+    font-style: italic;
+    margin-bottom: 12px;
+}
+
+.workout-meta {
+    display: flex;
+    gap: 20px;
+    font-size: 0.9rem;
+    color: #64748b;
+}
+
+.workout-date {
+    font-weight: 600;
+    color: #93c5fd;
+}
+
+.workout-day {
+    font-weight: 500;
+}
+
+.workout-duration {
+    color: #10b981;
+    font-weight: 600;
+}
+
+.team-badge {
+    background: #93c5fd;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin-top: 10px;
+    display: inline-block;
+}
+
+.recurring-badge {
+    background: #f59e0b;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin-top: 10px;
+    display: inline-block;
+    margin-left: 8px;
+}
+
+.workout-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.btn-success {
+    background-color: #10b981;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.btn-success:hover {
+    background-color: #059669;
+    transform: translateY(-1px);
+}
+
+.completed-badge {
+    background: #10b981;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.completed-date {
+    color: #64748b;
+    font-size: 0.9rem;
+    margin-left: 10px;
+}
+
+/* Home Page Planned Workouts Preview */
+.planned-workouts-section {
+    background: white;
+    border-radius: 16px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.planned-workouts-preview {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.planned-workout-preview-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: #f8fafc;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    transition: all 0.2s ease;
+}
+
+.planned-workout-preview-item:hover {
+    background: #f1f5f9;
+    transform: translateX(5px);
+}
+
+.planned-workout-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.planned-workout-icon {
+    font-size: 2rem;
+    width: 50px;
+    text-align: center;
+}
+
+.planned-workout-details h4 {
+    color: #1e293b;
+    margin-bottom: 5px;
+    font-size: 1.1rem;
+}
+
+.planned-workout-details p {
+    color: #64748b;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+}
+
+.planned-workout-meta {
+    display: flex;
+    gap: 15px;
+    font-size: 0.8rem;
+    color: #64748b;
+}
+
+
+
+.planned-duration {
+    color: #10b981;
+    font-weight: 600;
+}
+
+.team-indicator {
+    background: #93c5fd;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.7rem;
+}
+
+.recurring-indicator {
+    background: #f59e0b;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    margin-left: 8px;
+}
+
+.upcoming-badge {
+    background: #06b6d4;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    margin-left: 8px;
+}
+
+.planned-workout-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-small {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+}
+
+.more-planned-workouts {
+    text-align: center;
+    padding: 15px;
+    color: #64748b;
+    font-style: italic;
+}
+
+/* Dark Mode Styles for Planned Workouts */
+.dark-mode .create-section,
+.dark-mode .planned-list-section,
+.dark-mode .planned-workouts-section {
+    background: #2d2d2d;
+    border-color: #404040;
+}
+
+.dark-mode .planned-workout-item {
+    background: #404040;
+    border-color: #4a5568;
+}
+
+.dark-mode .planned-workout-item:hover {
+    background: #4a5568;
+}
+
+.dark-mode .planned-workout-item.completed {
+    background: #1a3a2e;
+    border-color: #10b981;
+}
+
+.dark-mode .workout-details h4 {
+    color: #e5e5e5;
+}
+
+.dark-mode .workout-name {
+    color: #a0aec0;
+}
+
+.dark-mode .workout-meta {
+    color: #a0aec0;
+}
+
+.dark-mode .planned-workout-preview-item {
+    background: #404040;
+    border-color: #4a5568;
+}
+
+.dark-mode .planned-workout-preview-item:hover {
+    background: #4a5568;
+}
+
+.dark-mode .planned-workout-details h4 {
+    color: #e5e5e5;
+}
+
+.dark-mode .planned-workout-details p {
+    color: #a0aec0;
+}
+
+.dark-mode .planned-workout-meta {
+    color: #a0aec0;
+}
+
+/* Responsive Design for Planned Workouts */
+@media (max-width: 768px) {
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .workout-info {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    
+    .workout-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+    
+    .workout-meta {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+    }
+    
+    .planned-workout-preview-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+    
+    .planned-workout-info {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .planned-workout-meta {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+    }
+}
+
+/* Confetti Animation */
+@keyframes confetti-fall {
+    0% {
+        transform: translateY(-100vh) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+.confetti {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    background: #ff6b6b;
+    animation: confetti-fall 3s linear forwards;
+    z-index: 10000;
+}
+
+.confetti:nth-child(2n) {
+    background: #4ecdc4;
+    animation-delay: 0.1s;
+}
+
+.confetti:nth-child(3n) {
+    background: #45b7d1;
+    animation-delay: 0.2s;
+}
+
+.confetti:nth-child(4n) {
+    background: #96ceb4;
+    animation-delay: 0.3s;
+}
+
+.confetti:nth-child(5n) {
+    background: #feca57;
+    animation-delay: 0.4s;
+}
+
+.confetti:nth-child(6n) {
+    background: #ff9ff3;
+    animation-delay: 0.5s;
+}
+
+.confetti:nth-child(7n) {
+    background: #54a0ff;
+    animation-delay: 0.6s;
+}
+
+.confetti:nth-child(8n) {
+    background: #5f27cd;
+    animation-delay: 0.7s;
+}
+
+/* Success Message Popup */
+.success-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    padding: 30px 40px;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    z-index: 10001;
+    text-align: center;
+    animation: success-popup 0.6s ease-out;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+@keyframes success-popup {
+    0% {
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 0;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+}
+
+.success-popup h3 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.success-popup p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin: 0;
+}
